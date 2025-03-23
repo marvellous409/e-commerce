@@ -113,7 +113,7 @@ const ArriVal = () => {
       {/* Responsive Product Grid */}
       <div className="max-w-7xl mx-auto mt-10 px-10 sm:px-0">
       <p className="text-gray-500 mx-auto">click on the image for better view</p>
-        <div className="grid grid-cols-1  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4 p-8 sm:p-20">
+        <div className="grid grid-cols-1  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4  sm:p-5">
           {newData.map((items) => (
             <div
               className="flex flex-col items-center relative overflow-hidden h-[380px] border-4 border-white shadow-lg shadow-[#f0e3e3] cursor-pointer"

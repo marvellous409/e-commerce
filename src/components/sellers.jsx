@@ -86,7 +86,7 @@ const Sellers = () => {
           <hr className="w-12 border-b-4 border-red-500 mx-auto mt-3 rounded-2xl font-extrabold"></hr>
           <div className="max-w-7xl mx-auto  px-10 sm:px-0">
             <p className="text-gray-500 mx-auto">click on the image for better view</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-8 sm:p-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:p-5">
               {sellerData.map((sells) => (
                 <div
                   className="bg-white flex flex-col items-center relative overflow-hidden h-[390px] border-4 border-white shadow-lg shadow-[#f0e3e3] rounded-lg"
