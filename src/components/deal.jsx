@@ -7,7 +7,9 @@ const Deal = () => {
       <div className="flex flex-col items-center text-center md:flex-row md:justify-center md:text-left gap-4 md:gap-52">
         {/* Image on top for small screens, left for desktop */}
         <div className="w-full flex justify-center md:w-auto">
-          <img className="w-64 md:w-96 mb-6 md:mb-0" src={ImImage} alt="Deal of the week" />
+          <img className="w-64 md:w-96 mb-6 md:mb-0" src={ImImage} alt="Deal of the week" 
+          loading="lazy"
+          />
         </div>
 
         {/* Content */}

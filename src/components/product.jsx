@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import imImage1 from "../assets/firstlady.jpg";
 import imImage2 from "../assets/shoes.jpg";
 import imImage3 from "../assets/manyellow.jpg";
@@ -8,16 +9,19 @@ const productData = [
     id: 1,
     img: imImage1,
     text: "Women’s",
+    link: "/women"
   },
   {
     id: 2,
     img: imImage2,
     text: "Accessories",
+    link: "/accessories"
   },
   {
     id: 3,
     img: imImage3,
     text: "Men’s",
+    link: "/men"
   },
 ];
 
@@ -36,13 +40,14 @@ const ProDuct = () => {
               className="absolute left-0 z-0 h-full w-full object-cover"
               src={item.img}
               alt={item.text}
+              loading="lazy"
             />
 
             {/* Dark Overlay */}
             <div className="absolute h-full w-full bg-black opacity-40 z-10" />
 
             {/* Button */}
-            <div className="relative z-20">
+            <Link to={item.link} className="relative z-20">
               <Button
                 bg_colour="bg-white"
                 value={item.text}
@@ -50,7 +55,7 @@ const ProDuct = () => {
                 text_colour="black"
                 font_type="bold"
               />
-            </div>
+            </Link>
           </div>
         ))}
       </div>
