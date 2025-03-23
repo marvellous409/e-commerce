@@ -84,8 +84,8 @@ const Sellers = () => {
         <>
           <h2 className="text-5xl text-center">Best Sellers</h2>
           <hr className="w-12 border-b-4 border-red-500 mx-auto mt-3 rounded-2xl font-extrabold"></hr>
-
-          <div className="max-w-7xl mx-auto mt-10 px-10 sm:px-0">
+          <div className="max-w-7xl mx-auto  px-10 sm:px-0">
+            <p className="text-gray-500 mx-auto">click on the image for better view</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-8 sm:p-20">
               {sellerData.map((sells) => (
                 <div
