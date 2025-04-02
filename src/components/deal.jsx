@@ -1,4 +1,4 @@
-import ImImage from "../assets/xxxten.jpeg";
+import ImImage from "../assets/xxxten.webp";
 import Button from "./button";
 
 const Deal = () => {

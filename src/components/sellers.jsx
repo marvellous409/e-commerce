@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Button from "./button";
-import ImImage from "../assets/manyellow.jpg";
-import ImImage2 from "../assets/redshoe.jpg";
-import ImImage3 from "../assets/noel.jpg";
-import ImImage4 from "../assets/red.jpg";
-import ImImage5 from "../assets/sweeter.jpg";
+import ImImage from "../assets/manyellow.webp";
+import ImImage2 from "../assets/redshoe.webp";
+import ImImage3 from "../assets/noel.webp";
+import ImImage4 from "../assets/red.webp";
+import ImImage5 from "../assets/sweeter.webp";
 import Icons from "../assets/currency.svg";
 import Icon3 from "../assets/schedule.svg";
 import Icon2 from "../assets/progress.svg";
@@ -130,7 +130,7 @@ const Sellers = () => {
           </div>
 
           {/* Additional info section */}
-          <div className="mt-10 flex flex-col sm:flex-row justify-center bg-gray-300 max-w-[1080px] h-auto sm:h-[80px] mx-auto gap-2 p-5 rounded-lg">
+          <div className="mt-10 flex flex-col sm:flex-row justify-center bg-gray-300 max-w-[1080px] h-auto sm:h-[80px] md:flex-row md:h-[100px] mx-auto gap-2 p-5 rounded-lg">
             <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/4 gap-2">
               <img className="w-12 h-12" src={Icon1} alt="Icon1" />
               <div className="flex-1">
@@ -147,7 +147,7 @@ const Sellers = () => {
               </div>
             </div>
 
-            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/4 gap-2">
+            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/5 gap-2">
               <img className="w-12 h-12" src={Icon2} alt="Icon2" />
               <div className="flex-1">
                 <h4 className="font-bold">Secure Packaging</h4>

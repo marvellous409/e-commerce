@@ -1,6 +1,6 @@
-import Images1 from "../assets/redshoe.jpg";
-import Images2 from "../assets/both.jpg";
-import Images3 from "../assets/grootes.jpg";
+import Images1 from "../assets/redshoe.webp";
+import Images2 from "../assets/both.webp";
+import Images3 from "../assets/grootes.webp";
 
 const Latest = () => {
   return (

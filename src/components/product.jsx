@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import imImage1 from "../assets/firstlady.jpg";
-import imImage2 from "../assets/shoes.jpg";
-import imImage3 from "../assets/manyellow.jpg";
+import imImage1 from "../assets/firstlady.webp";
+import imImage2 from "../assets/shoes.webp";
+import imImage3 from "../assets/manyellow.webp";
 import Button from "./button";
 
 const productData = [

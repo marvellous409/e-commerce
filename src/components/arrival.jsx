@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Button from "./button";
-import ImImage1 from "../assets/red.jpg";
-import ImImage2 from "../assets/sweeter.jpg";
-import ImImage3 from "../assets/brown.jpg";
-import ImImage4 from "../assets/shoes.jpg";
-import ImImage5 from "../assets/eyeglass.jpg";
-import ImImage6 from "../assets/manyellow.jpg";
-import ImImage7 from "../assets/gray.jpg";
-import ImImage8 from "../assets/fair.jpg";
-import ImImage9 from "../assets/redshoe.jpg";
-import ImImage10 from "../assets/both.jpg";
+import ImImage1 from "../assets/red.webp";
+import ImImage2 from "../assets/sweeter.webp";
+import ImImage3 from "../assets/brown.webp";
+import ImImage4 from "../assets/shoes.webp";
+import ImImage5 from "../assets/eyeglass.webp";
+import ImImage6 from "../assets/manyellow.webp";
+import ImImage7 from "../assets/gray.webp";
+import ImImage8 from "../assets/fair.webp";
+import ImImage9 from "../assets/redshoe.webp";
+import ImImage10 from "../assets/both.webp";
 
 const newData = [
   {
