@@ -50,7 +50,6 @@ const Men = () => {
                 src={item.images?.[0] || "https://via.placeholder.com/300"}
                 alt={item.title}
                 className="w-full h-80 object-cover rounded"
-                loading="lazy"
               />
               <h2 className="text-2xl font-bold mt-2">{item.title}</h2>
 

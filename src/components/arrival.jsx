@@ -125,7 +125,7 @@ const ArriVal = () => {
                 className="h-52 max-w-2xl object-cover w-full"
                 src={items.img}
                 alt="product"
-                loading="lazy"
+
               />
 
               {/* Product Details */}

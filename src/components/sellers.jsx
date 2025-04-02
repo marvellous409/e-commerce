@@ -97,7 +97,6 @@ const Sellers = () => {
                     className="absolute left-0 z-0 h-52 w-full object-cover"
                     src={sells.img}
                     alt="product"
-                    loading="lazy"
                   />
                   <div className="relative z-10 text-center mt-52">
                     <p className="text-[18px] font-semibold">{sells.text}</p>

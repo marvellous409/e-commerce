@@ -40,7 +40,6 @@ const ProDuct = () => {
               className="absolute left-0 z-0 h-full w-full object-cover"
               src={item.img}
               alt={item.text}
-              loading="lazy"
             />
 
             {/* Dark Overlay */}

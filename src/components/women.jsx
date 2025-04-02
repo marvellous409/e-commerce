@@ -52,7 +52,6 @@ const Accessories = () => {
                 src={item.image || "https://via.placeholder.com/300"}
                 alt={item.title}
                 className="w-full max-w-[300px] h-60 sm:h-80 md:h-96 lg:h-[400px] object-cover rounded justify-self-center"
-                loading="lazy"
               />
 
               <h2 className="text-2xl font-bold mt-2">{item.title}</h2>

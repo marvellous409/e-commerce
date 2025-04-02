@@ -12,7 +12,6 @@ const HeroSection = () => {
             className="w-[300px] h-[400px] md:w-[500px] md:h-[600px] rounded-2xl mb-6 md:mb-0"
             src={imImage} 
             alt="Fashion model"
-            loading="lazy"
           />
 
           {/* Text Content */}
