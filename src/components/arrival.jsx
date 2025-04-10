@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import Button from "./button";
+import { db } from "./firebase/firebaseconfig";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+
+// Images
 import ImImage1 from "../assets/red.webp";
 import ImImage2 from "../assets/sweeter.webp";
 import ImImage3 from "../assets/brown.webp";
@@ -27,7 +30,7 @@ const newData = [
     img: ImImage1,
     text: "Comfortable high-waisted bag with trendy ripped",
     price: "$ 350.00",
-    press2: "New",
+    press2: "$ -333",
     details:
       "This fashionable accessory is both spacious and stylish, suitable for everyday use.",
   },
@@ -67,7 +70,7 @@ const newData = [
     img: ImImage7,
     text: "Adorable onesie with cute cartoon design and snap",
     price: "$ 150.00",
-    press2: "New",
+    press2: "$ -333",
     details: "Made from soft fabric for ultimate comfort.",
   },
   {
@@ -82,7 +85,7 @@ const newData = [
     img: ImImage4,
     text: "Stylish sneakers with velcro straps and breather mesh",
     price: "$ 280.00",
-    press1: "- $333",
+    press1: "$ -333",
     details: "Designed for both casual wear and active lifestyles.",
   },
   {
@@ -95,92 +98,120 @@ const newData = [
 ];
 
 const ArriVal = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cart, setCart] = useState([]);
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  const showToastMessage = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 9000); // Hide after 9s
+  };
+
+  const addToCart = async (item) => {
+    try {
+      const colRef = collection(db, "cart");
+      const snapshot = await getDocs(colRef);
+
+      const exists = snapshot.docs.find(
+        (doc) => doc.data().productId === item.id
+      );
+
+      if (exists) {
+        showToastMessage("🛒 Item already in cart!");
+        return;
+      }
+
+      const cartItem = {
+        productId: item.id,
+        text: item.text,
+        price: item.price,
+        quantity: 1,
+        img: item.img,
+      };
+
+      await addDoc(colRef, cartItem);
+      setCart((prev) => [...prev, cartItem]);
+      showToastMessage("✅ Item added to cart!");
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
 
   return (
-    <div className="mt-20 px-4">
-      <h2 className="text-3xl font-bold text-center">New Arrival</h2>
-      <hr className="w-12 border-b-4 border-red-500 mx-auto mt-3 rounded-2xl font-extrabold"></hr>
-
-      {/* Category Buttons */}
-      <div className="flex justify-center mt-5 flex-wrap">
-        <p className="border border-red-500 px-6 bg-red-500 text-white">New</p>
-        <p className="border px-6"><Link to='/accessories'><span className="font-bold text-black">accessories</span></Link></p>
-        <p className="border px-6"><Link to='/men'><span className="font-bold text-black">men</span></Link></p>
-        <p className="border px-6"><Link to='/women'><span className="font-bold text-black">women</span></Link></p>
-      </div>
-
-      {/* Responsive Product Grid */}
-      <div className="max-w-7xl mx-auto mt-10 px-10 sm:px-0">
-      <p className="text-gray-500 mx-auto">click on the image for better view</p>
-        <div className="grid grid-cols-1  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4  sm:p-5">
-          {newData.map((items) => (
-            <div
-              className="flex flex-col items-center relative overflow-hidden h-[380px] border-4 border-white shadow-lg shadow-[#f0e3e3] cursor-pointer"
-              key={items.id}
-              onClick={() => setSelectedProduct(items)}
-            >
-              {/* Product Image */}
-              <img
-                className="h-52 max-w-2xl object-cover w-full"
-                src={items.img}
-                alt="product"
-
-              />
-
-              {/* Product Details */}
-              <p className="text-[18px] mt-4">{items.text}</p>
-              <p className="text-red-500 text-2xl font-bold">{items.price}</p>
-
-              {/* Discount/New Button */}
-              <div className="absolute top-0 right-0 h-1.5">
-                {items.press1 && (
-                  <Button
-                    bg_colour="bg-green-500"
-                    value={items.press1}
-                    text_colour="white"
-                    font_type="bold"
-                  />
-                )}
-              </div>
-              <div className="absolute top-0 left-0 h-1.5">
-                {items.press2 && (
-                  <Button
-                    bg_colour="bg-red-500"
-                    value={items.press2}
-                    text_colour="white"
-                    font_type="bold"
-                  />
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Popup for more details */}
-      {selectedProduct && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
-            <img
-              className="h-52 max-w-2xl object-cover w-full"
-              src={selectedProduct.img}
-              alt="product"
-            />
-            <h3 className="text-xl font-bold">{selectedProduct.text}</h3>
-            <p className="mt-2">{selectedProduct.details}</p>
-            <p className="text-red-500 text-2xl font-bold mt-4">
-              {selectedProduct.price}
-            </p>
-            <button
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-              onClick={() => setSelectedProduct(null)}
-            >
-              Close
-            </button>
-          </div>
+    <div className="min-h-screen bg-gray-100">
+      {showToast && (
+        <div className=" slide-in fixed top-4 left-4 bg-white text-green-600 border border-green-400 shadow-lg px-4 py-3 rounded-lg z-50 animate-slide-in">
+          <span className="font-semibold">{toastMessage}</span>
         </div>
       )}
+
+      {/* Header */}
+      <header className="text-center py-10 mt-30">
+        <h1 className="text-4xl font-bold text-gray-800">New Arrivals</h1>
+        <hr className="w-12 border-b-4 border-red-500 mx-auto mt-3 rounded-2xl font-extrabold"></hr>
+        <p className="text-gray-500 mt-2">Check out our latest collection</p>
+      </header>
+
+      {/* Product Grid */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-6 pb-10">
+        {newData.map((item) => (
+          <div
+            key={item.id}
+            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group relative"
+          >
+            {/* Product Image */}
+            <img
+              src={item.img}
+              alt={item.text}
+              className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+
+            {/* Product Info */}
+            <div className="p-4">
+              <h3 className="text-md font-semibold mb-1">{item.text}</h3>
+              <p className="text-red-500 text-xl font-bold">{item.price}</p>
+
+              {/* Add to Cart Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToCart(item);
+                }}
+                className="mt-4 w-full bg-gradient-to-r from-cyan-500 to-pink-500 text-white py-2 rounded-lg hover:scale-105 transition-all duration-300"
+              >
+                Add to Cart
+              </button>
+            </div>
+
+            {/* Top Right Label - press1 */}
+            {item.press1 && (
+              <div className="absolute top-2 right-2 z-10">
+                <Button
+                  bg_colour="bg-green-500"
+                  value={item.press1}
+                  text_colour="white"
+                  font_type="bold"
+                />
+              </div>
+            )}
+
+            {/* Top Left Label - press2 */}
+            {item.press2 && (
+              <div className="absolute top-2 left-2 z-10">
+                <Button
+                  bg_colour="bg-red-500"
+                  value={item.press2}
+                  text_colour="white"
+                  font_type="bold"
+                />
+              </div>
+            )}
+          </div>
+        ))}
+      </section>
     </div>
   );
 };

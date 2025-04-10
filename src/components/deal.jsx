@@ -1,12 +1,13 @@
 import ImImage from "../assets/xxxten.webp";
 import Button from "./button";
+import "./deal.css";
 
 const Deal = () => {
   return (
     <div className="bg-[#d4d8db] p-4 mt-6.5">
       <div className="flex flex-col items-center text-center md:flex-row md:justify-center md:text-left gap-4 md:gap-52">
         {/* Image on top for small screens, left for desktop */}
-        <div className="w-full flex justify-center md:w-auto">
+        <div className="w-full flex justify-center md:w-auto slide-in">
           <img className="w-64 md:w-96 mb-6 md:mb-0" src={ImImage} alt="Deal of the week" 
           />
         </div>

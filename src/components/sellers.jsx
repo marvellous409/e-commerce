@@ -60,7 +60,7 @@ const Sellers = () => {
       {selectedProduct ? (
         // Show only the modal when a product is selected
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-90">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-center sm:px-20">
+          <div className="bg-white  rounded-lg shadow-lg max-w-md text-center sm:px-20">
             <img
               className="h-52 max-w-2xl object-cover w-full"
               src={selectedProduct.img}
@@ -72,7 +72,7 @@ const Sellers = () => {
               {selectedProduct.price}
             </p>
             <button
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+              className="mt-4 px-4 py-2 bg-gradient-to-r from-purple-800 to-pink-500 text-white rounded"
               onClick={() => setSelectedProduct(null)}
             >
               Close
@@ -85,53 +85,62 @@ const Sellers = () => {
           <h2 className="text-5xl text-center">Best Sellers</h2>
           <hr className="w-12 border-b-4 border-red-500 mx-auto mt-3 rounded-2xl font-extrabold"></hr>
           <div className="max-w-7xl mx-auto  px-10 sm:px-0">
-            <p className="text-gray-500 mx-auto">click on the image for better view</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:p-5">
-              {sellerData.map((sells) => (
+            <p className="text-gray-500 mx-auto">
+              click on the image for better view
+            </p>
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-6 pb-10">
+              {sellerData.map((sell) => (
                 <div
-                  className="bg-white flex flex-col items-center relative overflow-hidden h-[390px] border-4 border-white shadow-lg shadow-[#f0e3e3] rounded-lg"
-                  key={sells.id}
-                  onClick={() => setSelectedProduct(sells)}
+                  key={sell.id}
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group relative"
+                  onClick={() => setSelectedProduct(sell)}
                 >
+                  {/* Product Image */}
                   <img
-                    className="absolute left-0 z-0 h-52 w-full object-cover"
-                    src={sells.img}
-                    alt="product"
+                    src={sell.img}
+                    alt={sell.text}
+                    className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="relative z-10 text-center mt-52">
-                    <p className="text-[18px] font-semibold">{sells.text}</p>
-                    <p className="text-red-500 text-2xl font-bold">
-                      {sells.price}
+
+                  {/* Product Info */}
+                  <div className="p-4">
+                    <h3 className="text-md font-semibold mb-1">{sell.text}</h3>
+                    <p className="text-red-500 text-xl font-bold">
+                      {sell.price}
                     </p>
                   </div>
-                  <div className="absolute top-0 right-0 h-1.5">
-                    {sells.press1 && (
+
+                  {/* Top Right Label - press1 */}
+                  {sell.press1 && (
+                    <div className="absolute top-2 right-2 z-10">
                       <Button
                         bg_colour="bg-green-500"
-                        value={sells.press1}
+                        value={sell.press1}
                         text_colour="white"
                         font_type="bold"
                       />
-                    )}
-                  </div>
-                  <div className="absolute top-0 left-0 h-1.5">
-                    {sells.press2 && (
+                    </div>
+                  )}
+
+                  {/* Top Left Label - press2 */}
+                  {sell.press2 && (
+                    <div className="absolute top-2 left-2 z-10">
                       <Button
                         bg_colour="bg-red-500"
-                        value={sells.press2}
+                        value={sell.press2}
                         text_colour="white"
                         font_type="bold"
                       />
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               ))}
-            </div>
+            </section>
           </div>
 
           {/* Additional info section */}
           <div className="mt-10 flex flex-col sm:flex-row justify-center bg-gray-300 max-w-[1080px] h-auto sm:h-[80px] md:flex-row md:h-[100px] mx-auto gap-2 p-5 rounded-lg">
-            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/4 gap-2">
+            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/3 gap-2">
               <img className="w-12 h-12" src={Icon1} alt="Icon1" />
               <div className="flex-1">
                 <h4 className="font-bold">New Shipping</h4>
@@ -139,7 +148,7 @@ const Sellers = () => {
               </div>
             </div>
 
-            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/4 gap-2">
+            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/3 gap-2">
               <img className="w-12 h-12" src={Icons} alt="Icons" />
               <div className="flex-1">
                 <h4 className="font-bold">Fast Delivery</h4>
@@ -147,7 +156,7 @@ const Sellers = () => {
               </div>
             </div>
 
-            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/5 gap-2">
+            <div className="flex items-center border-b-2 sm:border-b-0 sm:border-r-2 border-white py-4 w-full sm:w-1/3 gap-2">
               <img className="w-12 h-12" src={Icon2} alt="Icon2" />
               <div className="flex-1">
                 <h4 className="font-bold">Secure Packaging</h4>
@@ -155,7 +164,7 @@ const Sellers = () => {
               </div>
             </div>
 
-            <div className="flex items-center py-4 w-full sm:w-1/4 gap-1.5">
+            <div className="flex items-center py-4 w-full sm:w-1/3 gap-1.5">
               <img className="w-12 h-12" src={Icon3} alt="Icon3" />
               <div className="flex-1">
                 <h4 className="font-bold">24/7 Support</h4>
