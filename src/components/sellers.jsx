@@ -84,7 +84,7 @@ const Sellers = () => {
         <>
           <h2 className="text-5xl text-center">Best Sellers</h2>
           <hr className="w-12 border-b-4 border-red-500 mx-auto mt-3 rounded-2xl font-extrabold"></hr>
-          <div className="max-w-7xl mx-auto  px-10 sm:px-0">
+          <div className="max-w-7xl mx-auto  px-0 sm:px-0">
             <p className="text-gray-500 mx-auto">
               click on the image for better view
             </p>
@@ -114,10 +114,11 @@ const Sellers = () => {
                   {sell.press1 && (
                     <div className="absolute top-2 right-2 z-10">
                       <Button
-                        bg_colour="bg-green-500"
+                        bg_colour="green"
                         value={sell.press1}
                         text_colour="white"
                         font_type="bold"
+                        width="200px"
                       />
                     </div>
                   )}
@@ -126,10 +127,11 @@ const Sellers = () => {
                   {sell.press2 && (
                     <div className="absolute top-2 left-2 z-10">
                       <Button
-                        bg_colour="bg-red-500"
+                        bg_colour="red"
                         value={sell.press2}
                         text_colour="white"
                         font_type="bold"
+                        width="200px"
                       />
                     </div>
                   )}

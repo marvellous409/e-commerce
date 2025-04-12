@@ -22,11 +22,12 @@ const HeroSection = () => {
             </p>
             <div className="mt-8">
               <Button
-                bg_colour="bg-red-500"
+                bg_colour="red"
                 value="Shop Now!"
                 text_size="3xl"
                 text_colour="white"
                 font_type="bold"
+                width="200px"
               />
             </div>
           </div>

@@ -30,7 +30,7 @@ const newData = [
     img: ImImage1,
     text: "Comfortable high-waisted bag with trendy ripped",
     price: "$ 350.00",
-    press2: "$ -333",
+    press2: "$ New",
     details:
       "This fashionable accessory is both spacious and stylish, suitable for everyday use.",
   },
@@ -70,7 +70,7 @@ const newData = [
     img: ImImage7,
     text: "Adorable onesie with cute cartoon design and snap",
     price: "$ 150.00",
-    press2: "$ -333",
+    press2: "$ New",
     details: "Made from soft fabric for ultimate comfort.",
   },
   {
@@ -188,24 +188,28 @@ const ArriVal = () => {
 
             {/* Top Right Label - press1 */}
             {item.press1 && (
-              <div className="absolute top-2 right-2 z-10">
+              <div className="absolute top-1 right-1 z-10">
                 <Button
-                  bg_colour="bg-green-500"
+                  bg_colour="green"
                   value={item.press1}
                   text_colour="white"
                   font_type="bold"
+                  width="100px"
+                  height="40px"
                 />
               </div>
             )}
 
             {/* Top Left Label - press2 */}
             {item.press2 && (
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute top-1 left-1 z-10">
                 <Button
-                  bg_colour="bg-red-500"
+                  bg_colour="red"
                   value={item.press2}
                   text_colour="white"
                   font_type="bold"
+                  width="100px"
+                  height="40px"
                 />
               </div>
             )}

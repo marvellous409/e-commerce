@@ -42,7 +42,7 @@ const Deal = () => {
           {/* Centered Button */}
           <div className="mt-6 flex justify-center">
             <Button
-              bg_colour="bg-black"
+              bg_colour="black"
               value="shop now"
               text_size="2"
               text_colour="white"

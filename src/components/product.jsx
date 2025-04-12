@@ -48,11 +48,12 @@ const ProDuct = () => {
             {/* Button */}
             <Link to={item.link} className="relative z-20">
               <Button
-                bg_colour="bg-white"
+                bg_colour="white"
                 value={item.text}
                 text_size="3xl"
                 text_colour="black"
                 font_type="bold"
+                width="200px"
               />
             </Link>
           </div>
