@@ -28,11 +28,13 @@ const Font = () => {
               className="border py-2 px-4 w-full md:w-72 bg-white text-lg border-gray-400 rounded-md focus:outline-none"
             />
             <Button
-              bg_colour="bg-red-500"
+              bg_colour="red"
               value="Subscribe"
               text_size="lg"
               text_colour="white"
               font_type="semibold"
+              width="100px"
+              height="40px"
               className="w-full md:w-auto mt-3 md:mt-0 mr-3.5"
             />
           </div>

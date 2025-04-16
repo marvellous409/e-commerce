@@ -47,6 +47,8 @@ const Deal = () => {
               text_size="2"
               text_colour="white"
               font_type="bold"
+              width="200px"
+              height="40px"
             />
           </div>
         </div>

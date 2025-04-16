@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import Load from "./load";
 
 const Men = () => {
   const [userApiState, setUserApiState] = useState([]);
   const [expandedItems, setExpandedItems] = useState({});
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const ApiFetch = async () => {
@@ -13,15 +15,27 @@ const Men = () => {
       }
 
       try {
-        const response = await fetch("https://api.escuelajs.co/api/v1/products");  
+        const response = await fetch(
+          "https://api.escuelajs.co/api/v1/products"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }
         const userData = await response.json();
-        setUserApiState(userData);
-        setError(null);
+        if (Array.isArray(userData)) {
+          // Simulate delay
+          setTimeout(() => {
+            setUserApiState(userData);
+            setIsLoading(false);
+          }, 1000); // ⏱️ 2 seconds delay
+          setError(null);
+        } else {
+          setError("Invalid API response.");
+          setIsLoading(false);
+        }
       } catch (error) {
-        setError("Error fetching API. Please check your internet connection.");
+        setError("Error fetching API. Please try again.");
+        setIsLoading(false);
       }
     };
 
@@ -39,9 +53,11 @@ const Men = () => {
       </h1>
 
       {error ? (
-        <p className="text-center text-red-500 text-lg mt-80">{error}</p> // Show error message when offline
-      ) : userApiState.length === 0 ? (
-        <p className="text-center text-blue-500 text-lg mt-80">Loading products...</p>
+        <p className="text-center text-red-500 text-lg mt-80">{error}</p>
+      ) : isLoading ? (
+        <div className="flex justify-center items-center h-[80vh]">
+          <Load />
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-8 p-8  sm:p-20">
           {userApiState.slice(0, 15).map((item) => (
@@ -68,7 +84,9 @@ const Men = () => {
                 </button>
               </div>
 
-              <p className="text-gray-600 font-bold text-lg mt-2">${item.price}</p>
+              <p className="text-gray-600 font-bold text-lg mt-2">
+                ${item.price}
+              </p>
             </div>
           ))}
         </div>

@@ -1,34 +1,39 @@
 import { useEffect, useState } from "react";
+import Loader from "./loader"; // Make sure this path is correct
 
 const Accessories = () => {
-  const [userApiState, setUserApiState] = useState([]); 
+  const [userApiState, setUserApiState] = useState([]);
   const [expandedItems, setExpandedItems] = useState({});
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const ApiFetch = async () => {
       if (!navigator.onLine) {
         setError("No Internet Connection. Please connect to the internet.");
+        setIsLoading(false);
         return;
       }
 
       try {
         const response = await fetch("https://dummyjson.com/products");
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
+        if (!response.ok) throw new Error("Failed to fetch products");
         const userData = await response.json();
 
-        console.log("API Response:", userData);
-
         if (Array.isArray(userData.products)) {
-          setUserApiState(userData.products); 
+          // Simulate delay
+          setTimeout(() => {
+            setUserApiState(userData.products);
+            setIsLoading(false);
+          }, 1000); // ⏱️ 2 seconds delay
           setError(null);
         } else {
           setError("Invalid API response.");
+          setIsLoading(false);
         }
       } catch (error) {
         setError("Error fetching API. Please try again.");
+        setIsLoading(false);
       }
     };
 
@@ -47,11 +52,13 @@ const Accessories = () => {
 
       {error ? (
         <p className="text-center text-red-500 text-lg mt-80">{error}</p>
-      ) : userApiState.length === 0 ? (
-        <p className="text-center text-blue-500 text-lg mt-80">
-          Loading products...
-        </p>
+      ) : isLoading ? (
+        <div className="flex justify-center items-center h-[80vh]">
+          <Loader />
+        </div>
       ) : (
+        // your product list here
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8 sm:p-20">
           {userApiState.slice(0, 15).map((item) => (
             <div key={item.id} className="border p-4 shadow-lg rounded-lg">
@@ -66,7 +73,10 @@ const Accessories = () => {
               <p className="text-lg font-bold mt-4 capitalize">
                 {expandedItems[item.id]
                   ? item.description || "No description available"
-                  : `${item.description?.substring(0, 100) || "No description available"}...`}
+                  : `${
+                      item.description?.substring(0, 100) ||
+                      "No description available"
+                    }...`}
               </p>
 
               <div className="mt-2">

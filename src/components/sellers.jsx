@@ -118,7 +118,8 @@ const Sellers = () => {
                         value={sell.press1}
                         text_colour="white"
                         font_type="bold"
-                        width="200px"
+                        width="100px"
+                        height="40px"
                       />
                     </div>
                   )}
@@ -131,7 +132,8 @@ const Sellers = () => {
                         value={sell.press2}
                         text_colour="white"
                         font_type="bold"
-                        width="200px"
+                        width="100px"
+                        height="40px"
                       />
                     </div>
                   )}

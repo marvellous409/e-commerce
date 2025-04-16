@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "./button";
 import { db } from "./firebase/firebaseconfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
@@ -103,14 +104,17 @@ const ArriVal = () => {
   const [showToast, setShowToast] = useState(false);
 
   const showToastMessage = (message) => {
+    console.log("📣 Showing toast:", message); // <-- Add this line for debugging
     setToastMessage(message);
     setShowToast(true);
     setTimeout(() => {
       setShowToast(false);
-    }, 9000); // Hide after 9s
+    }, 3000); // Hide after 3s
   };
 
   const addToCart = async (item) => {
+    console.log("🛒 Button clicked! Item:", item); // Confirm button click
+
     try {
       const colRef = collection(db, "cart");
       const snapshot = await getDocs(colRef);
@@ -119,8 +123,11 @@ const ArriVal = () => {
         (doc) => doc.data().productId === item.id
       );
 
+      console.log("🔍 Item already in cart?", exists); // Check if item already exists
+
       if (exists) {
         showToastMessage("🛒 Item already in cart!");
+        console.log("🚫 Item not added, already exists");
         return;
       }
 
@@ -134,16 +141,18 @@ const ArriVal = () => {
 
       await addDoc(colRef, cartItem);
       setCart((prev) => [...prev, cartItem]);
+
+      console.log("✅ Item added to Firestore cart!");
       showToastMessage("✅ Item added to cart!");
     } catch (error) {
-      console.error("Error adding to cart:", error);
+      console.error("❌ Error adding to cart:", error);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100">
       {showToast && (
-        <div className=" slide-in fixed top-4 left-4 bg-white text-green-600 border border-green-400 shadow-lg px-4 py-3 rounded-lg z-50 animate-slide-in">
+        <div className="fixed top-10 left-1/2 transform -translate-x-1/2 bg-white text-green-600 border border-green-400 shadow-lg px-4 py-3 rounded-lg z-[9999]">
           <span className="font-semibold">{toastMessage}</span>
         </div>
       )}
@@ -153,6 +162,12 @@ const ArriVal = () => {
         <h1 className="text-4xl font-bold text-gray-800">New Arrivals</h1>
         <hr className="w-12 border-b-4 border-red-500 mx-auto mt-3 rounded-2xl font-extrabold"></hr>
         <p className="text-gray-500 mt-2">Check out our latest collection</p>
+        <div className="flex capitalize justify-center mt-10">
+          <p className="bg-red-500 px-8 text-lg">new</p>
+          <p className="border px-8  text-lg"><Link to="/women">women</Link></p>
+          <p className="border px-8  text-lg"><Link to="/men">men</Link></p>
+          <p className="border px-8 text-lg"><Link to="/accessories">accessories</Link></p>
+        </div>
       </header>
 
       {/* Product Grid */}
@@ -228,7 +243,7 @@ export default ArriVal;
 //     <p className="border border-red-500 px-7.5 bg-red-500 text-white">
 //       New
 //     </p>
-//     <p className="border px-6.5">Woman</p>
+//     <p className="border px-6.5">Woman</p> 
 //     <p className="border px-6.5">Accessories</p>
 //     <p className="border px-6.5">Men</p>
 //   </div>
